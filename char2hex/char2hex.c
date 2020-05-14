@@ -11,11 +11,10 @@ bool binary_to_hex(void *dst, const char *src, size_t src_len, bool use_uppercas
 	static const char b16_lowercase[] = "0123456789abcdef";
 
 	register const char *const b16 = use_uppercase ? b16_uppercase : b16_lowercase;
-	uint8_t ch;
 
 	for (size_t i = 0; i < src_len; i++, dst += 2) {
 
-		ch = src[i];
+		uint8_t ch = src[i];
 		*((char *)dst)   = b16[ ch/16 %16 ];
 		*((char *)dst+1) = b16[ ch%16 ];
 	}
