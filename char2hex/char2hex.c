@@ -31,8 +31,8 @@ bool binary_to_hex(void *dst, const char *src, uint_fast32_t src_len, bool use_u
     static const char b16_uppercase[] = "0123456789ABCDEF";
     static const char b16_lowercase[] = "0123456789abcdef";
 
-    register const char *const b16 = use_uppercase ? b16_uppercase : b16_lowercase;
-    char *out = (char *)dst;
+    register const char *const restrict b16 = use_uppercase ? b16_uppercase : b16_lowercase;
+    char *restrict out = (char *)dst;
 
     for (uint_fast32_t i = 0; i < src_len; i++, out += 2) {
         uint_fast8_t ch = src[i];
