@@ -84,11 +84,22 @@ bool hex_to_binary(void *dst, const char *src, size_t src_len) {
         ma una soluzione di questo tipo impedisce di continuare a usare const char * visto che si deve modificare l'ultimo
         carattere */
 
+#if 0
 	for (size_t i = 0; i < src_len; i += 2) {
 		int16_t ch = (tab[((const uint8_t *)src)[i]] << 4) + tab[((const uint8_t *)src)[i+1]];
 		if (ch < 0) return false;
 		((uint8_t *)dst)[i/2] = (uint8_t)ch;
 	}
+#endif
+	
+	const uint8_t *const in = (uint8_t *)src;
+    	uint8_t *restrict out = (uint8_t *)dst;
 
+	for (uint_fast32_t i = 0; i < src_len; i += 2) {
+		const int_fast16_t ch = (tab[in[i]] << 4) + tab[in[i+1]];
+		if (ch < 0) return false;
+		out[i >> 1] = (uint8_t)ch;
+	}
+	
 	return true;
 }
