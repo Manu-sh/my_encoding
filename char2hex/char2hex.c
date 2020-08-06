@@ -35,7 +35,7 @@ bool binary_to_hex(void *dst, const char *src, uint_fast32_t src_len, bool use_u
     char *restrict out = (char *)dst;
 
     for (uint_fast32_t i = 0; i < src_len; i++, out += 2) {
-        uint_fast8_t ch = src[i];
+        const uint_fast8_t ch = src[i];
         out[0] = b16[ ch >> 4 ];
         out[1] = b16[ ch & 15 ];
     }
